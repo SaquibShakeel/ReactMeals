@@ -17,12 +17,12 @@ import MealItem from "./MealItem/MealItem";
         for(const key in responseData) {
           loadedMeals.push({
             id: key,
-            name: responseData[key].name,
-            description: responseData[key].description,
-            price: responseData[key].price,
+            name: responseData[key]?.name,
+            description: responseData[key]?.description,
+            price: responseData[key]?.price,
           });
-          setMeals(loadedMeals);
         }
+        setMeals(loadedMeals);
         
       }
 
@@ -30,20 +30,20 @@ import MealItem from "./MealItem/MealItem";
 
     }, []);
 
-    const mealsList = meals.map((meal) => (
-      <MealItem
-        id={meal.id}
-        key={meal.id}
-        name={meal.name}
-        description={meal.description}
-        price={meal.price}
-      />
-    ));
-
       return (
         <section className={classes.meals}>
           <Card>
-            <ul>{mealsList}</ul>
+            <ul>
+              {meals?.map((meal) => (
+                <MealItem
+                  id={meal.id}
+                  key={meal.id}
+                  name={meal.name}
+                  description={meal.description}
+                  price={meal.price}
+                />
+              ))}
+            </ul>
           </Card>
         </section>
       );
